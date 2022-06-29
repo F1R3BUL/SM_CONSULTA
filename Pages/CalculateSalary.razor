@@ -17,6 +17,7 @@
         {
             CalculatorDAO.Statement = "SELECT * FROM dbo.Employees WHERE Name= '" +CalculatorDAO.EmployeeName+ "'";
             CalculatorDAO.READ();
+            SalaryCalculator.Calculate(SalaryCalculator.Salary);
         }       
     }
 }

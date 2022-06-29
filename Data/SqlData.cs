@@ -8,7 +8,7 @@ namespace Salary_Calculator.Data
         private static string connectionString = @"workstation id=TaxCalculator.mssql.somee.com;packet size=4096;user id=F1R3BUL_SQLLogin_1;pwd=r8gf2b94o4;data source=TaxCalculator.mssql.somee.com;persist security info=False;initial catalog=TaxCalculator";
         public static string Statement = "";
         public static string DataOutput = "";
-        public static void ConnectionTest()
+        public static string ConnectionTest()
         {
             try
             {
@@ -16,12 +16,12 @@ namespace Salary_Calculator.Data
                 {
                     connection.Open();
                     connection.Close();
-                    CalculatorDAO.status = "Connection Success";
+                    return "Connection Success";
                 }
             }
             catch
             {
-                CalculatorDAO.status = "Connection Error";
+                return "Connection Error";
 
             }
         }
@@ -64,20 +64,23 @@ namespace Salary_Calculator.Data
                 {
                     while (reader.Read())
                     {
-                        List<string> value = new List<string>() { reader.GetValue(0).ToString(), reader.GetValue(1).ToString().Trim(), reader.GetValue(2).ToString().Trim()};
-                        string[] arr = string.Join(" ", value).ToString().Split();
-                        if (arr.Length > 3)
+                        if (reader.FieldCount <= 3)
                         {
-                            SalaryCalculator.MinSalary = arr[0];
-                            SalaryCalculator.IncomeTax = arr[1];
-                            SalaryCalculator.InsuranceTax = arr[2];
-                            SalaryCalculator.InsuranceMaxTax = arr[3];
-                        }
-                        else
-                        {
+                            List<string> value = new List<string>() { reader.GetValue(0).ToString(), reader.GetValue(1).ToString().Trim(), reader.GetValue(2).ToString().Trim() };
+                            string[] arr = string.Join(" ", value).ToString().Split();
                             CalculatorDAO.EmployeeName = arr[1];
                             SalaryCalculator.Salary = arr[2];
                         }
+                        else
+                        { 
+                        List<string> value = new List<string>() { reader.GetValue(0).ToString(), reader.GetValue(1).ToString().Trim(), reader.GetValue(2).ToString().Trim(), reader.GetValue(3).ToString().Trim(), reader.GetValue(4).ToString() };
+                        string[] arr = string.Join(" ", value).ToString().Split();
+                            SalaryCalculator.MinSalary = arr[1];
+                            SalaryCalculator.IncomeTax = arr[2];
+                            SalaryCalculator.InsuranceTax = arr[3];
+                            SalaryCalculator.InsuranceMaxTax = arr[4];
+
+                    }
                     }
                     CalculatorDAO.status = "Employee found";
                 }

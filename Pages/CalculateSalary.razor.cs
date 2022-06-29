@@ -6,10 +6,6 @@ namespace Salary_Calculator.Pages
         public static string status = "Failed";
         public static string EmployeeName = null;
         public static string Statement = "";
-        public static void Connection()
-        {
-            SalaryCalculator.DatabaseConnectionOpen();
-        }
         public static void ADD()
         {
             SqlData.OUTPUT(Statement);

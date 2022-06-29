@@ -1,7 +1,8 @@
 ﻿@page "/Taxes/Information/"
 @using Salary_Calculator.Data
 @using Salary_Calculator.Pages
-<h3>Taxes Information</h3>
+<h2>Taxes Information</h2>
+<h3>Current Tax Rate:</h3>
 <input placeholder="Minimal Salary" type="number" @bind="@SalaryCalculator.MinSalary"/>
 <input placeholder="Income Tax" type="number" @bind="@SalaryCalculator.IncomeTax"/>
 <input placeholder="Insurance Tax" type="number" @bind="@SalaryCalculator.InsuranceTax"/>
@@ -11,7 +12,7 @@
 @code {
     private static void Change()
     {
-        CalculatorDAO.Statement = "INSERT INTO dbo.Taxes (Minimal, IncomeTax, InsuranceTax, InsuranceMaxTax) VALUES ('" + SalaryCalculator.MinSalary + "','" + SalaryCalculator.IncomeTax + "','" + SalaryCalculator.InsuranceTax + "','" + SalaryCalculator.InsuranceMaxTax + "');";
+        CalculatorDAO.Statement = "INSERT INTO dbo.Taxes (Minimal, IncomeTax, InsuranceTax, InsuranceMaxTax) VALUES ('" + Math.Abs(double.Parse(SalaryCalculator.MinSalary)) + "','" + Math.Abs(double.Parse(SalaryCalculator.IncomeTax)/100) + "','" + Math.Abs(double.Parse(SalaryCalculator.InsuranceTax)/100) + "','" + Math.Abs(double.Parse(SalaryCalculator.InsuranceMaxTax)) + "');";
         CalculatorDAO.ADD();
     }
 }

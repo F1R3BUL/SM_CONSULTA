@@ -1,9 +1,10 @@
 ﻿@page "/RegisterEmployee"
 @using Salary_Calculator.Data
-<h3>Register Employee</h3>        
+<h3>Register Employee</h3>
+<h6>Type in the Employee information as following:</h6>
 <input placeholder="Please type in your name"type="text" name="EmployeeName" @bind="@CalculatorDAO.EmployeeName"/> <input placeholder="Please type in your salary" type="number" name="SalaryInput"  @bind="@SalaryCalculator.Salary"/>
 <input type="submit" @onclick = "Sumbit" />
-<p>@CalculatorDAO.status</p>
+
 
 @code {
     private static void Sumbit()

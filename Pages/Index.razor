@@ -1,6 +1,19 @@
 ﻿@page "/"
+@using Salary_Calculator.Data
 
 <PageTitle>Index</PageTitle>
 
 <h1>Welcome to the Tax Calculator</h1>
 <p> This is a project designed and created by Nicola Admasu in solving a problem given by SM CONSULTA</p>
+<p>Please test connection to database before usign the website!</p>
+<p>@Test</p><button type="submit" @onclick="@TestConnection">Test</button>
+
+
+@code{
+    private static string Test = "Waiting";
+    private void TestConnection()
+    {
+        SqlData.ConnectionTest();
+        Test = SqlData.ConnectionTest();
+    }
+}
