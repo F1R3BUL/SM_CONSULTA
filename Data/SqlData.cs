@@ -66,8 +66,18 @@ namespace Salary_Calculator.Data
                     {
                         List<string> value = new List<string>() { reader.GetValue(0).ToString(), reader.GetValue(1).ToString().Trim(), reader.GetValue(2).ToString().Trim()};
                         string[] arr = string.Join(" ", value).ToString().Split();
-                        CalculatorDAO.EmployeeName = arr[1];
-                        SalaryCalculator.Salary = arr[2];
+                        if (arr.Length > 3)
+                        {
+                            SalaryCalculator.MinSalary = arr[0];
+                            SalaryCalculator.IncomeTax = arr[1];
+                            SalaryCalculator.InsuranceTax = arr[2];
+                            SalaryCalculator.InsuranceMaxTax = arr[3];
+                        }
+                        else
+                        {
+                            CalculatorDAO.EmployeeName = arr[1];
+                            SalaryCalculator.Salary = arr[2];
+                        }
                     }
                     CalculatorDAO.status = "Employee found";
                 }

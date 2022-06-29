@@ -1,0 +1,17 @@
+﻿@page "/Taxes/Information/"
+@using Salary_Calculator.Data
+@using Salary_Calculator.Pages
+<h3>Taxes Information</h3>
+<input placeholder="Minimal Salary" type="number" @bind="@SalaryCalculator.MinSalary"/>
+<input placeholder="Income Tax" type="number" @bind="@SalaryCalculator.IncomeTax"/>
+<input placeholder="Insurance Tax" type="number" @bind="@SalaryCalculator.InsuranceTax"/>
+<input placeholder="Insurance Ceiling" type="number" @bind="@SalaryCalculator.InsuranceMaxTax"/>
+<p></p>
+<button type="submit" @onclick="Change"  name="something">Change</button>
+@code {
+    private static void Change()
+    {
+        CalculatorDAO.Statement = "INSERT INTO dbo.Taxes (Minimal, IncomeTax, InsuranceTax, InsuranceMaxTax) VALUES ('" + SalaryCalculator.MinSalary + "','" + SalaryCalculator.IncomeTax + "','" + SalaryCalculator.InsuranceTax + "','" + SalaryCalculator.InsuranceMaxTax + "');";
+        CalculatorDAO.ADD();
+    }
+}

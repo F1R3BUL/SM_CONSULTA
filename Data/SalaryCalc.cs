@@ -5,7 +5,7 @@ namespace Salary_Calculator.Data;
 public class SalaryCalculator
 {
     public static string MinSalary = null;
-    public static string MaxSalary = null;
+    public static string InsuranceMaxTax = null;
     public static string IncomeTax = null;
     public static string InsuranceTax = null;
     public static string Salary = null;
@@ -13,7 +13,7 @@ public class SalaryCalculator
     {
         SqlData.ConnectionTest();
     }
-    public void Calculate(string salary)
+    public static void Calculate(string salary)
     {
         double value = Math.Round(double.Parse(salary), 2);
         value = 3100;

@@ -2,7 +2,7 @@
 @using Salary_Calculator.Data
 <h3>Salary Calculator</h3>
 <input placeholder="Please type in your name" type="text" name="EmployeeName" @bind="@CalculatorDAO.EmployeeName"/>
-<input type="submit" @onclick="Sumbit"  name="shit"/> <p></p>
+<button type="submit" @onclick="Sumbit"  name="shit">Find Employee</button> <p></p>
 <output>Salary: @SalaryCalculator.Salary</output> <p></p>
 <p>Status: @CalculatorDAO.status</p>
 
@@ -16,7 +16,7 @@
         else
         {
             CalculatorDAO.Statement = "SELECT * FROM dbo.Employees WHERE Name= '" +CalculatorDAO.EmployeeName+ "'";
-        CalculatorDAO.READ();
+            CalculatorDAO.READ();
         }       
     }
 }
