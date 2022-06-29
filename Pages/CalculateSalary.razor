@@ -1,0 +1,22 @@
+﻿@page "/SalaryCalculator"
+@using Salary_Calculator.Data
+<h3>Salary Calculator</h3>
+<input placeholder="Please type in your name" type="text" name="EmployeeName" @bind="@CalculatorDAO.EmployeeName"/>
+<input type="submit" @onclick="Sumbit"  name="shit"/> <p></p>
+<output>Salary: @SalaryCalculator.Salary</output> <p></p>
+<p>Status: @CalculatorDAO.status</p>
+
+@code {
+    private static void Sumbit()
+    {
+        if (CalculatorDAO.EmployeeName == null)
+        {
+            CalculatorDAO.status = "Name is required";
+        }
+        else
+        {
+            CalculatorDAO.Statement = "SELECT * FROM dbo.Employees WHERE Name= '" +CalculatorDAO.EmployeeName+ "'";
+        CalculatorDAO.READ();
+        }       
+    }
+}

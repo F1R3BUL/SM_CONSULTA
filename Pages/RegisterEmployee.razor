@@ -1,0 +1,21 @@
+﻿@page "/RegisterEmployee"
+@using Salary_Calculator.Data
+<h3>Register Employee</h3>        
+<input placeholder="Please type in your name"type="text" name="EmployeeName" @bind="@CalculatorDAO.EmployeeName"/> <input placeholder="Please type in your salary" type="number" name="SalaryInput"  @bind="@SalaryCalculator.Salary"/>
+<input type="submit" @onclick = "Sumbit" />
+<p>@CalculatorDAO.status</p>
+
+@code {
+    private static void Sumbit()
+    {
+        if (CalculatorDAO.EmployeeName == null || SalaryCalculator.Salary == null)
+        {
+            CalculatorDAO.status = "Name and Salary are required";
+        }
+        else
+        {
+            CalculatorDAO.Statement = @"INSERT INTO dbo.Employees (Name, Salary) VALUES ('"+CalculatorDAO.EmployeeName+"','"+SalaryCalculator.Salary+"');";
+            CalculatorDAO.ADD();
+        }
+    }
+}
