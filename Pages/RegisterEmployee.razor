@@ -4,8 +4,8 @@
 <h3>Register Employee</h3>
 <h6>Type in the Employee information as following:</h6>
 <input placeholder="Please type in your name"type="text" name="EmployeeName" @bind="@CalculatorDAO.EmployeeName"/> <input placeholder="Please type in your salary" type="number" name="SalaryInput"  @bind="@SalaryCalculator.Salary"/>
-<input type="submit" @onclick = "Sumbit" />
-
+<button type="submit" @onclick = "Sumbit">Register</button>
+<p>Status: @CalculatorDAO.RegisterStatus</p>
 
 @code {
     private static void Sumbit()
@@ -16,8 +16,9 @@
         }
         else
         {
+            CalculatorDAO.RegisterStatus = "Successfuly added";
             CalculatorDAO.Statement = @"INSERT INTO dbo.Employees (Name, Salary) VALUES ('"+CalculatorDAO.EmployeeName+"','"+SalaryCalculator.Salary+"');";
-            CalculatorDAO.ADD();
+            CalculatorDAO.ADD();            
         }
     }
 }

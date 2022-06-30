@@ -2,17 +2,40 @@
 @using Salary_Calculator.Data
 @using Salary_Calculator.Pages
 <h2>Taxes Information</h2>
-<h3>Current Tax Rate:</h3>
+<p>Current Minimal Salary:@SalaryCalculator.MinSalary $</p>
+<p>Current Income Tax:@SalaryCalculator.IncomeTax %</p>
+<p>Current Insurance Tax:@SalaryCalculator.InsuranceTax %</p>
+<p>Current Insurance Ceiling:@SalaryCalculator.InsuranceMaxTax $</p>
+<button type="submit" @onclick="Check">Show current taxes</button>
+<h3>Change Tax Rate:</h3>
+<p>Minimal Salary:</p>
 <input placeholder="Minimal Salary" type="number" @bind="@SalaryCalculator.MinSalary"/>
+<p>Income Tax:</p>
 <input placeholder="Income Tax" type="number" @bind="@SalaryCalculator.IncomeTax"/>
+<p>Insurance Tax:</p>
 <input placeholder="Insurance Tax" type="number" @bind="@SalaryCalculator.InsuranceTax"/>
+<p>Insurance Ceiling:</p>
 <input placeholder="Insurance Ceiling" type="number" @bind="@SalaryCalculator.InsuranceMaxTax"/>
-<p></p>
-<button type="submit" @onclick="Change"  name="something">Change</button>
+<p>Status: @CalculatorDAO.TaxStatus</p>
+<button type="submit" @onclick="Change">Change</button> 
+
 @code {
     private static void Change()
     {
-        CalculatorDAO.Statement = "INSERT INTO dbo.Taxes (Minimal, IncomeTax, InsuranceTax, InsuranceMaxTax) VALUES ('" + Math.Abs(double.Parse(SalaryCalculator.MinSalary)) + "','" + Math.Abs(double.Parse(SalaryCalculator.IncomeTax)/100) + "','" + Math.Abs(double.Parse(SalaryCalculator.InsuranceTax)/100) + "','" + Math.Abs(double.Parse(SalaryCalculator.InsuranceMaxTax)) + "');";
-        CalculatorDAO.ADD();
+        if (SalaryCalculator.MinSalary == 0 || SalaryCalculator.IncomeTax == 0 || SalaryCalculator.InsuranceTax == 0 || SalaryCalculator.InsuranceMaxTax == 0)
+        {
+            CalculatorDAO.TaxStatus = "Please fill all the fields";
+        }
+        else
+        {
+            CalculatorDAO.Statement = "INSERT INTO dbo.Taxes (Minimal, IncomeTax, InsuranceTax, InsuranceMaxTax) VALUES ('" + Math.Abs(SalaryCalculator.MinSalary) + "','" + Math.Abs(SalaryCalculator.IncomeTax) + "','" + Math.Abs(SalaryCalculator.InsuranceTax) + "','" + Math.Abs(SalaryCalculator.InsuranceMaxTax) + "');";
+            CalculatorDAO.ADDTAX();         
+        }
+
+    }
+    public static void Check()
+    {
+        CalculatorDAO.Statement = "SELECT * FROM dbo.Taxes WHERE id=(SELECT max(id) FROM dbo.Taxes);";
+        CalculatorDAO.READ();      
     }
 }

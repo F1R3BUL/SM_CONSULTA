@@ -38,16 +38,27 @@ namespace Salary_Calculator.Data
                 if(reader.HasRows)
                 {
                     reader.Close();
-                    CalculatorDAO.status = "Error: Employee already exists";               
+                    CalculatorDAO.RegisterStatus = "Employee already exists";               
                 }
                 else
                 {
                     reader.Close();
-                    CalculatorDAO.status = "Successfuly added!";
                     sqlCommand = new SqlCommand(Statement, connection);
                     reader = sqlCommand.ExecuteReader();
                     reader.Close();
                 }
+                connection.Close();
+            }
+        }
+        public static void TAXOUTPUT(string statement)
+        {
+            Statement = statement;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                CalculatorDAO.status = "Connection Success";
+                SqlCommand sqlCommand = new SqlCommand(Statement, connection);
+                sqlCommand.ExecuteReader();                
                 connection.Close();
             }
         }
@@ -75,18 +86,18 @@ namespace Salary_Calculator.Data
                         { 
                         List<string> value = new List<string>() { reader.GetValue(0).ToString(), reader.GetValue(1).ToString().Trim(), reader.GetValue(2).ToString().Trim(), reader.GetValue(3).ToString().Trim(), reader.GetValue(4).ToString() };
                         string[] arr = string.Join(" ", value).ToString().Split();
-                            SalaryCalculator.MinSalary = arr[1];
-                            SalaryCalculator.IncomeTax = arr[2];
-                            SalaryCalculator.InsuranceTax = arr[3];
-                            SalaryCalculator.InsuranceMaxTax = arr[4];
-
+                            SalaryCalculator.MinSalary = double.Parse(arr[1]);
+                            SalaryCalculator.IncomeTax = double.Parse(arr[2]);
+                            SalaryCalculator.InsuranceTax = double.Parse(arr[3]);
+                            SalaryCalculator.InsuranceMaxTax = double.Parse(arr[4]);
+                            CalculatorDAO.TaxStatus = "Done";
                     }
                     }
-                    CalculatorDAO.status = "Employee found";
+                    CalculatorDAO.CalculateStatus = "Employee found";
                 }
                 else
                 {
-                    CalculatorDAO.status = "Employee not found";
+                    CalculatorDAO.CalculateStatus = "Employee not found";
                 }
                 reader.Close();
                 connection.Close();
