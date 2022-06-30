@@ -3,7 +3,7 @@
 @using Salary_Calculator.Pages
 <h3>Salary Calculator</h3>
 <input placeholder="Please type in your name" type="text" name="EmployeeName" @bind="@CalculatorDAO.EmployeeName"/>
-<button type="submit" @onclick="Sumbit"  name="shit">Calculate</button> <p></p>
+<button type="submit" @onclick="Sumbit">Calculate</button> <button type="submit" @onclick = "Clear">Clear</button> <p></p>
 <output>Salary After Taxes: @SalaryCalculator.Salary</output> <p></p>
 <p>Status: @CalculatorDAO.CalculateStatus</p>
 
@@ -21,5 +21,10 @@
             CalculatorDAO.READ();
             SalaryCalculator.Calculate(SalaryCalculator.Salary);
         }       
+    }
+    private static void Clear()
+    {
+        CalculatorDAO.EmployeeName = null;
+        SalaryCalculator.Salary = 0;
     }
 }
