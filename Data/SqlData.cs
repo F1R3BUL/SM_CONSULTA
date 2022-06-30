@@ -103,5 +103,30 @@ namespace Salary_Calculator.Data
                 connection.Close();
             }
         }
+        public static void UPDATE(string statement)
+        {
+            Statement = statement;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                CalculatorDAO.status = "Connection Success";
+                string CheckIfExists = "SELECT * FROM dbo.Employees WHERE Name= '" + CalculatorDAO.EmployeeName + "'";
+                SqlCommand sqlCommand = new SqlCommand(CheckIfExists, connection);
+                var reader = sqlCommand.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Close();
+                    sqlCommand = new SqlCommand(Statement, connection);
+                    reader = sqlCommand.ExecuteReader();
+                    reader.Close();
+                    CalculatorDAO.RegisterStatus = "Successefuly updated";
+                }
+                else
+                {
+                    CalculatorDAO.RegisterStatus = "There was an error. Please try again later!";
+                }
+                connection.Close();
+            }
+        }
     }
 }

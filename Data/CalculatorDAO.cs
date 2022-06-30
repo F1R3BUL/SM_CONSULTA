@@ -13,6 +13,10 @@ namespace Salary_Calculator.Pages
         {
             SqlData.OUTPUT(Statement);
         }
+        public static void CHANGE()
+        {
+            SqlData.UPDATE(Statement);
+        }
         public static void ADDTAX()
         {
             SqlData.TAXOUTPUT(Statement);

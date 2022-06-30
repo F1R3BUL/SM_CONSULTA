@@ -5,6 +5,7 @@
 <h6>Type in the Employee information as following:</h6>
 <input placeholder="Please type in your name"type="text" name="EmployeeName" @bind="@CalculatorDAO.EmployeeName"/> <input placeholder="Please type in your salary" type="number" name="SalaryInput"  @bind="@SalaryCalculator.Salary"/>
 <button type="submit" @onclick = "Sumbit">Register</button>
+<button type="submit" @onclick = "ChangeSumbit">Change</button>
 <p>Status: @CalculatorDAO.RegisterStatus</p>
 
 @code {
@@ -19,6 +20,19 @@
             CalculatorDAO.RegisterStatus = "Successfuly added";
             CalculatorDAO.Statement = @"INSERT INTO dbo.Employees (Name, Salary) VALUES ('"+CalculatorDAO.EmployeeName+"','"+SalaryCalculator.Salary+"');";
             CalculatorDAO.ADD();            
+        }
+    }
+    private static void ChangeSumbit()
+    {
+        if (CalculatorDAO.EmployeeName == null || SalaryCalculator.Salary == null)
+        {
+            CalculatorDAO.status = "Name and Salary are required ";
+        }
+        else
+        {
+            CalculatorDAO.RegisterStatus = "Successfuly changed";
+            CalculatorDAO.Statement = @"UPDATE dbo.Employees SET Salary = '"+SalaryCalculator.Salary+"' WHERE Name = '"+CalculatorDAO.EmployeeName+"';";
+            CalculatorDAO.CHANGE();            
         }
     }
 }
