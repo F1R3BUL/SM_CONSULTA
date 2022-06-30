@@ -4,7 +4,7 @@
 <h3>Salary Calculator</h3>
 <input placeholder="Please type in your name" type="text" name="EmployeeName" @bind="@CalculatorDAO.EmployeeName"/>
 <button type="submit" @onclick="Sumbit"  name="shit">Calculate</button> <p></p>
-<output>Salary: @SalaryCalculator.Salary</output> <p></p>
+<output>Salary After Taxes: @SalaryCalculator.Salary</output> <p></p>
 <p>Status: @CalculatorDAO.CalculateStatus</p>
 
 @code {
