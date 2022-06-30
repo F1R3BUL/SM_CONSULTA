@@ -11,7 +11,7 @@
 @code {
     private static void Sumbit()
     {
-        if (CalculatorDAO.EmployeeName == null || SalaryCalculator.Salary == null)
+        if (CalculatorDAO.EmployeeName == null || SalaryCalculator.Salary == 0)
         {
             CalculatorDAO.status = "Name and Salary are required";
         }
@@ -24,7 +24,7 @@
     }
     private static void ChangeSumbit()
     {
-        if (CalculatorDAO.EmployeeName == null || SalaryCalculator.Salary == null)
+        if (CalculatorDAO.EmployeeName == null || SalaryCalculator.Salary == 0)
         {
             CalculatorDAO.status = "Name and Salary are required ";
         }

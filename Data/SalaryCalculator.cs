@@ -7,8 +7,8 @@ public class SalaryCalculator
     public static double InsuranceMaxTax = 0;
     public static double IncomeTax = 0;
     public static double InsuranceTax = 0;
-    public static string Salary = null;
-    public static void Calculate(string salary)
+    public static double  Salary = 0;
+    public static void Calculate(double salary)
     {
         CalculatorDAO.Statement = "SELECT * FROM dbo.Taxes WHERE id=(SELECT max(id) FROM dbo.Taxes);";
         CalculatorDAO.READ();
@@ -16,11 +16,11 @@ public class SalaryCalculator
         double Insurance = InsuranceTax/100;
         double Income = IncomeTax/100;
         double InsuranceMax = InsuranceMaxTax;
-        double sal = Math.Round(double.Parse(salary), 2);
+        double sal = Math.Round(salary, 2);
         double value;
         if (sal >= MinSal)
         {
-            double insvalue = Math.Round(double.Parse(salary), 2);
+            double insvalue = Math.Round(salary, 2);
             if (insvalue >= InsuranceMax)
             {
                 value = sal - ((sal - 1000) * Income);
@@ -33,7 +33,7 @@ public class SalaryCalculator
                 value = sal - (((sal - 1000) * Income) + insvalue);
                 sal = sal - (value + insvalue);
             }
-            SalaryCalculator.Salary = Math.Abs(Math.Round(sal, 2)).ToString();
+            SalaryCalculator.Salary = Math.Abs(Math.Round(sal, 2));
         }
         else
         {

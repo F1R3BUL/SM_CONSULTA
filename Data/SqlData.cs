@@ -80,7 +80,7 @@ namespace Salary_Calculator.Data
                             List<string> value = new List<string>() { reader.GetValue(0).ToString(), reader.GetValue(1).ToString().Trim(), reader.GetValue(2).ToString().Trim() };
                             string[] arr = string.Join(" ", value).ToString().Split();
                             CalculatorDAO.EmployeeName = arr[1];
-                            SalaryCalculator.Salary = arr[2];
+                            SalaryCalculator.Salary = double.Parse(arr[2]);
                         }
                         else
                         { 
@@ -93,7 +93,6 @@ namespace Salary_Calculator.Data
                             CalculatorDAO.TaxStatus = "Done";
                     }
                     }
-                    CalculatorDAO.CalculateStatus = "Employee found";
                 }
                 else
                 {
