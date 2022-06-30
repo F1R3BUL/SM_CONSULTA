@@ -21,7 +21,7 @@ public class SalaryCalculator
         if (sal > MinSal)
         {
             double insvalue = Math.Round(salary, 2);
-            if (insvalue >= InsuranceMax)
+            if (insvalue > InsuranceMax)
             {
                 value = (sal - MinSal) * Income;
                 insvalue = (InsuranceMax - MinSal) * Insurance;
