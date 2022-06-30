@@ -18,25 +18,26 @@ public class SalaryCalculator
         double InsuranceMax = InsuranceMaxTax;
         double sal = Math.Round(salary, 2);
         double value;
-        if (sal >= MinSal)
+        if (sal > MinSal)
         {
             double insvalue = Math.Round(salary, 2);
             if (insvalue >= InsuranceMax)
             {
-                value = sal - ((sal - 1000) * Income);
-                insvalue = sal - ((InsuranceMax - MinSal) * Insurance);
+                value = (sal - MinSal) * Income;
+                insvalue = (InsuranceMax - MinSal) * Insurance;
                 sal = sal - (value + insvalue);
             }
             else
             {
-                insvalue = sal - (sal * Insurance);
-                value = sal - (((sal - 1000) * Income) + insvalue);
+                insvalue = (sal-MinSal) * Insurance;
+                value = (sal - MinSal) * Income;
                 sal = sal - (value + insvalue);
             }
             SalaryCalculator.Salary = Math.Abs(Math.Round(sal, 2));
         }
         else
         {
+            SalaryCalculator.Salary = Math.Abs(Math.Round(sal, 2));
         }
     }
 }
